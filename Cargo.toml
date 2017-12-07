@@ -1,0 +1,7 @@
+[package]
+name = "slowloris"
+version = "0.1.0"
+authors = ["Chris Glass <chris.glass@canonical.com>"]
+
+[dependencies]
+curl = { git = "https://github.com/alexcrichton/curl-rust.git" }
