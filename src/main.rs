@@ -44,7 +44,7 @@ fn main() {
                 curl.post(true).unwrap();
                 println!("Performing POST to {} from minion {}", inner_url ,i);
                 // Actually send the request
-                //curl.perform().unwrap();
+                curl.perform().unwrap();
                 thread::sleep(Duration::from_millis(1000));
             }
         }));
