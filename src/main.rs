@@ -19,8 +19,8 @@ fn main() {
     for i in 0..WORKERS {
 
         // We need to copy the target_url here because curl needs a mutable
-        // reference, and we can't give the same mutable reference to several
-        // threads.
+        // reference? And we can't give the same mutable reference to several
+        // threads? Not sure TBH.
         let inner_url = target_url.clone();
 
         minions.push(thread::spawn(move || {
