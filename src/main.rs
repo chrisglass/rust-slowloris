@@ -3,6 +3,7 @@ use std::env;
 use std::time::Duration;
 extern crate curl;
 use curl::easy::{Easy, List};
+use std::process;
 
 static WORKERS: i32 = 255;
 
@@ -11,7 +12,10 @@ fn main() {
     let mut minions = vec![];
     let args: Vec<String> = env::args().collect();
 
-    // TODO: Handle the case where no argument is passed.
+    if args.len() < 2{
+       println!("Usage: {} <url>", args[0]);
+       process::exit(1);
+    }
     let target_url: String = args[1].clone();
 
     println!("Target: {}", target_url);
